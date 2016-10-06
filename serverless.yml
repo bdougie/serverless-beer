@@ -59,28 +59,28 @@ functions:
           path: beer/hello
           method: get
 
-    addRating:
-        handler: handler.addRating
-        events:
-          - http:
-              path: beer/rating
-              method: post
-              cors: true
+  addRating:
+    handler: handler.addRating
+    events:
+      - http:
+          path: beer/rating
+          method: post
+        cors: true
 
 resources:
   Resources:
     BeerDynamo:
       Type: 'AWS::DynamoDB::Table'
       Properties:
-        AttributeDefinitions:
-          -
-            AttributeName: id
-            AttributeType: S
-        KeySchema:
-          -
-            AttributeName: id
-            KeyType: HASH
-        ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
-        TableName: slsbeer
+          AttributeDefinitions:
+            -
+              AttributeName: id
+              AttributeType: S
+          KeySchema:
+            -
+              AttributeName: id
+              KeyType: HASH
+          ProvisionedThroughput:
+            ReadCapacityUnits: 1
+            WriteCapacityUnits: 1
+          TableName: slsbeer
