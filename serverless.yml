@@ -59,6 +59,14 @@ functions:
           path: beer/hello
           method: get
 
+    addRating:
+        handler: handler.addRating
+        events:
+          - http:
+              path: beer/rating
+              method: post
+              cors: true
+
 resources:
   Resources:
     BeerDynamo:
