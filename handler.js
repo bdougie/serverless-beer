@@ -26,3 +26,27 @@ module.exports.addRating = (event, context, callback) => {
       callback(null, { data: data });
   });
 }
+
+
+module.exports.getRating = (event, context, callback) => {
+  var docClient = new AWS.DynamoDB.DocumentClient();
+  var params = {
+    TableName: 'slsbeer',
+    FilterExpression : 'beer = :beer_name',
+    ExpressionAttributeValues : {':beer_name' : event.query.beer}
+  }
+
+  docClient.scan(params, (err, data) => {
+    if (err) {
+      callback(err);
+    }
+
+    var sum = data.Items.reduce((accumulated, current) => {
+      return accumulated + current.rating}
+    , 0);
+
+    var avarage = sum/data.Items.length;
+
+    callback(null, { avarageRating: avarage });
+  });
+}

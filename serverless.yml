@@ -67,6 +67,15 @@ functions:
           method: post
         cors: true
 
+
+  getRating:
+    handler: handler.getRating
+    events:
+      - http:
+          path: beer/rating
+          method: get
+        cors: true
+
 resources:
   Resources:
     BeerDynamo:
