@@ -16,6 +16,12 @@ service: beer-rating
 provider:
   name: aws
   runtime: nodejs4.3
+
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "dynamodb:*"
+      Resource: "arn:aws:dynamodb:*:*:table/slsbeer"
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:
 #    - Effect: "Allow"
@@ -44,16 +50,15 @@ provider:
 #    - exclude-me.js
 #  artifact: my-service-code.zip
 
+
 functions:
   hello:
     handler: handler.hello
-
-  events:
+    events:
       - http:
-        path: beer/hello
-        method: get
+          path: beer/hello
+          method: get
 
-# you can add CloudFormation resource templates here
 resources:
   Resources:
     BeerDynamo:
